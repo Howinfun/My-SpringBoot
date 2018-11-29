@@ -1,6 +1,8 @@
 package com.hyf.myspringboot.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,17 +19,22 @@ import java.time.LocalDateTime;
  * @company XMJBQ
  */
 @Table(name="t_user")
+@ApiModel(description = "用户表")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(name = "主键")
     private Integer id;
 
+    @ApiModelProperty(name="用户名")
     private String userName;
 
+    @ApiModelProperty(name="年龄")
     private String userAge;
 
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty(name = "生日")
     private LocalDateTime birthday;
 
     public User() {
