@@ -2,6 +2,9 @@ package com.hyf.myspringboot.mapper;
 
 import com.hyf.myspringboot.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.common.BaseMapper;
 
 /**
@@ -12,5 +15,9 @@ import tk.mybatis.mapper.common.BaseMapper;
  * @company XMJBQ
  */
 @Mapper
+@Component
 public interface UserMapper extends BaseMapper<User> {
+
+    @Select("select id,user_name,password,user_age,birthday,locked from t_user where user_name = #{userName}")
+    public User findUserByName(@Param("userName") String userName);
 }

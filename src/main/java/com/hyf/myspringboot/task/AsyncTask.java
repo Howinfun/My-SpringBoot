@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
  * @company XMJBQ
  */
 
-@Component
+//@Component
 public class AsyncTask {
 
     private static final Logger logger = LoggerFactory.getLogger(AsyncTask.class);

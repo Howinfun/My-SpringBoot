@@ -30,18 +30,25 @@ public class User implements Serializable {
     @ApiModelProperty(name="用户名")
     private String userName;
 
+    @ApiModelProperty(name="密码")
+    private String password;
+
     @ApiModelProperty(name="年龄")
-    private String userAge;
+    private Integer userAge;
 
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(name = "生日")
     private LocalDateTime birthday;
 
+    @ApiModelProperty(name = "是否被锁定")
+    private Boolean locked;
+
     public User() {
     }
 
-    public User(String userName, String userAge, LocalDateTime birthday) {
+    public User(String userName, String password,Integer userAge, LocalDateTime birthday) {
         this.userName = userName;
+        this.password = password;
         this.userAge = userAge;
         this.birthday = birthday;
     }
@@ -51,8 +58,10 @@ public class User implements Serializable {
         return "User{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
                 ", userAge='" + userAge + '\'' +
                 ", birthday=" + birthday +
+                ", locked=" + locked +
                 '}';
     }
 
@@ -72,11 +81,11 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    public String getUserAge() {
+    public Integer getUserAge() {
         return userAge;
     }
 
-    public void setUserAge(String userAge) {
+    public void setUserAge(Integer userAge) {
         this.userAge = userAge;
     }
 
@@ -86,5 +95,21 @@ public class User implements Serializable {
 
     public void setBirthday(LocalDateTime birthday) {
         this.birthday = birthday;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
     }
 }

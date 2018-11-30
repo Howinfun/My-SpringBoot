@@ -7,6 +7,9 @@ import com.hyf.myspringboot.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +37,7 @@ public class UserController {
     @GetMapping("/user/getUser")
     @ApiOperation(value = "根据id获取用户")
     @ApiImplicitParam(name = "user", value = "用户")
+    @RequiresPermissions(value = {"user:getById"})
     public ResponseJson getUserById(@RequestBody User user){
         return userService.getUserById(user.getId());
     }
@@ -46,8 +50,15 @@ public class UserController {
         return userService.delUserById(user.getId());
     }
 
+    /**
+     * RequiresRoles 是所需角色 包含 AND 和 OR 两种
+     * RequiresPermissions 是所需权限 包含 AND 和 OR 两种
+     *
+     * @return msg
+     */
     @GetMapping("/user/getList")
     @ApiOperation(value = "获取用户列表")
+    @RequiresRoles(value = {"admin"},logical = Logical.OR)
     public ResponseJson getUseList(){
         return userService.getUserList();
     }
